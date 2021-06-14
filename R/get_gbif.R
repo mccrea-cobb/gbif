@@ -13,7 +13,7 @@
 #' * GBIF_EMAIL = "your email address"
 #'
 #' @export
-#' @import tidyverse, usethis, rgbif, httr, sf
+#' @import dplyr magrittr usethis rgbif httr sf
 #'
 #' @examples
 #' \dontrun{
