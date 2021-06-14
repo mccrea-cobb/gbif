@@ -10,5 +10,5 @@ The `refugbif` package requires [R](https://cloud.r-project.org/) (>=4.0)   to f
 
 To install and load the `refugbif` R package:  
 `if (!require("devtools")) install.packages("devtools")`  
-`devtools::install_github("mccrea-cobb/refugbif", ref = "master")`  
+`devtools::install_github("mccrea-cobb/refugbif", ref = "main")`  
 `library(refugbif)`  
