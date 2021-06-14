@@ -15,7 +15,7 @@
 #'  }
 #'
 #' @export
-#' @import tidyverse
+#' @import dplyr
 #'
 #' @examples
 #' \dontrun{

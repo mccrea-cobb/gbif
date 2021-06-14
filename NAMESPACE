@@ -2,9 +2,8 @@
 
 export(clean_gbif)
 export(get_gbif)
-import("httr,")
-import("rgbif,")
-import("tidyverse,")
-import("usethis,")
+import(dplyr)
+import(httr)
+import(rgbif)
 import(sf)
-import(tidyverse)
+importFrom(magrittr,"%>%")

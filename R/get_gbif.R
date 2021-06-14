@@ -13,7 +13,12 @@
 #' * GBIF_EMAIL = "your email address"
 #'
 #' @export
-#' @import dplyr magrittr usethis rgbif httr sf
+#'
+#' @import dplyr
+#' @importFrom magrittr %>%
+#' @import rgbif
+#' @import httr
+#' @import sf
 #'
 #' @examples
 #' \dontrun{
@@ -23,15 +28,15 @@ get_gbif <- function(orgname = "ARCTIC NATIONAL WILDLIFE REFUGE",
                      pause = 45){
 
   # Query the FWS Cadastral Database for a refuge boundary
-  url <- parse_url("https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services")
+  url <- httr::parse_url("https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services")
   url$path <- paste(url$path, "National_Wildlife_Refuge_System_Boundaries/FeatureServer/0/query", sep = "/")
   url$query <- list(where = paste("ORGNAME =", paste0("'",orgname,"'")),  # Arctic Refuge, in this case
                     outFields = "*",
                     returnGeometry = "true",
                     f = "pgeojson"
   )
-  request <- build_url(url)
-  prop <- st_read(request)
+  request <- httr::build_url(url)
+  prop <- sf::st_read(request)
 
   message(paste("Downloaded boundary layer for", prop$ORGNAME))
 
@@ -45,23 +50,23 @@ get_gbif <- function(orgname = "ARCTIC NATIONAL WILDLIFE REFUGE",
   wkt <- get_wkt(prop)
 
   # Spin up a request for data from GBIF within the convex hull boundary of the refuge
-  res <- occ_download(pred_within(wkt))
+  res <- rgbif::occ_download(pred_within(wkt))
 
   #Pause to wait for the status to turn "Completed"
   message("Waiting for the data request from GBIF")
   Sys.sleep(pause)
 
   # Check on the status of the download
-  occ_download_meta(res)
+  rgbif::occ_download_meta(res)
 
   # Download the data
-  dat <- occ_download_get(res, overwrite = TRUE)
+  dat <- rgif::occ_download_get(res, overwrite = TRUE)
 
   message("Unpacking and loading the data...hold on tight!")
   Sys.sleep(15)
 
   # Import it into R
-  dat <- occ_download_import(dat)
+  dat <- rgbif::occ_download_import(dat)
 
   # Clip out GBIF observations outside of true refuge boundary
   clip_occ <- function(occ_recs, prop) {
