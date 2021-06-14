@@ -17,7 +17,7 @@
 #' @export
 #' @import tidyverse
 #'
-#' @example
+#' @examples
 #' \dontrun{
 #' clean_gbif(dat)
 #' }

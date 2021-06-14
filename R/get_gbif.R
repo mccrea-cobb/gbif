@@ -15,7 +15,7 @@
 #' @export
 #' @import tidyverse, usethis, rgbif, httr, sf
 #'
-#' @example
+#' @examples
 #' \dontrun{
 #' get_gbif(orgcode = 75600)
 #' }

@@ -25,6 +25,11 @@ First time user - Add your GBIF credentials (username, password, email) to an .r
 \item GBIF_EMAIL = "your email address"
 }
 }
+\examples{
+\dontrun{
+get_gbif(orgcode = 75600)
+}
+}
 \author{
 McCrea Cobb \email{mccrea@fws.gov}
 }

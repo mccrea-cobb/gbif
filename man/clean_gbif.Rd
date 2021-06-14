@@ -22,6 +22,11 @@ A cleaned data frame containing a single observation for each species. The data 
 \description{
 Clean up raw GBIF data
 }
+\examples{
+\dontrun{
+clean_gbif(dat)
+}
+}
 \author{
 McCrea Cobb \email{mccrea_cobb@fws.gov}
 }
