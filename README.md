@@ -1,4 +1,4 @@
-# gbif
+# refugbif
 An R package to download and clean GBIF species occurrence data in a National Wildlife Refuge.
 
 # USFWS Disclaimer
