@@ -22,7 +22,6 @@
 #' clean_gbif(dat)
 #' }
 clean_gbif <- function(dat){
-  library(tidyverse)
 
   out <- dat %>%
 

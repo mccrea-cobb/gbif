@@ -21,12 +21,6 @@
 #' }
 get_gbif <- function(orgname = "ARCTIC NATIONAL WILDLIFE REFUGE",
                      pause = 45){
-  # Required packages
-  library(tidyverse)
-  library(usethis)
-  library(rgbif)
-  library(httr)
-  library(sf)
 
   # Query the FWS Cadastral Database for a refuge boundary
   url <- parse_url("https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services")
