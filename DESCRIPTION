@@ -1,16 +1,17 @@
-Package: gbif
-Title: What the Package Does (One Line, Title Case)
+Package: refugbif
+Title: Refuge GBIF Data
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "McCrea",
+           family = "Cobb",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+           email = "mccrea_cobb@fws.gov")
+Description: Downloads and cleans GBIF species occurrence data in a National Wildlife Refuge.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Import:
+  tidyverse, usethis, rgbif, httr, sf
