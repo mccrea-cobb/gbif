@@ -60,7 +60,7 @@ get_gbif <- function(orgname = "ARCTIC NATIONAL WILDLIFE REFUGE",
   rgbif::occ_download_meta(res)
 
   # Download the data
-  dat <- rgif::occ_download_get(res, overwrite = TRUE)
+  dat <- rgbif::occ_download_get(res, overwrite = TRUE)
 
   message("Unpacking and loading the data...hold on tight!")
   Sys.sleep(15)
