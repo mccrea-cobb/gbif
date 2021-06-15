@@ -12,3 +12,5 @@ To install and load the `refugbif` R package:
 `if (!require("devtools")) install.packages("devtools")`  
 `devtools::install_github("mccrea-cobb/refugbif", ref = "main")`  
 `library(refugbif)`  
+
+`species_list <- get_species("ARCTIC NATIONAL WILDLIFE REFUGE") # Get species list for Arctic Refuge`
