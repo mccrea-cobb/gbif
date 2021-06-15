@@ -1,9 +1,9 @@
 #' Download species occurrence data from GBIF
 #'
-#' @author McCrea Cobb \email{mccrea@@fws.gov}
+#' @author McCrea Cobb \email{mccrea_cobb@@fws.gov}
 #'
-#' @param orgcode The org code for desired refuge
-#' @param pause The number of seconds to pause to wait for the data request from GBIF to be ready. Default is 30 secs.
+#' @param prop An \code{sf} multipolygon object of a refuge boundary, returned by \code{get_refuge}.
+#' @param pause The number of seconds to pause to wait for the data request from GBIF to be ready. Default is 60 secs. If it returns file size: 0 MB then increase the pause time.
 #'
 #' @return A data frame of species occurrence data from GBIF within the boundary of the desired refuge
 #'
@@ -22,35 +22,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_gbif(orgcode = 75600)
+#' get_gbif(orgname = "KODIAK NATIONAL WILDLIFE REFUGE")
 #' }
-get_gbif <- function(orgname = "ARCTIC NATIONAL WILDLIFE REFUGE",
-                     pause = 45){
-
-  # Query the FWS Cadastral Database for a refuge boundary
-  url <- httr::parse_url("https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services")
-  url$path <- paste(url$path, "National_Wildlife_Refuge_System_Boundaries/FeatureServer/0/query", sep = "/")
-  url$query <- list(where = paste("ORGNAME =", paste0("'",orgname,"'")),  # Arctic Refuge, in this case
-                    outFields = "*",
-                    returnGeometry = "true",
-                    f = "pgeojson"
-  )
-  request <- httr::build_url(url)
-  prop <- sf::st_read(request)
-
-  message(paste("Downloaded boundary layer for", prop$ORGNAME))
-
+get_gbif <- function(prop,
+                     pause = 60,
+                     ...){
   # Create a simplified convex hull of the refuge boundary in WKT format
-  get_wkt <- function(prop) {
-    wkt_txt <- prop %>%
-      sf::st_convex_hull() %>%
-      sf::st_geometry() %>% sf::st_as_text()
-    wkt_txt
-  }
   wkt <- get_wkt(prop)
 
   # Spin up a request for data from GBIF within the convex hull boundary of the refuge
-  res <- rgbif::occ_download(pred_within(wkt))
+  res <- rgbif::occ_download(rgbif::pred_within(wkt))
 
   #Pause to wait for the status to turn "Completed"
   message("Waiting for the data request from GBIF")
@@ -69,16 +50,6 @@ get_gbif <- function(orgname = "ARCTIC NATIONAL WILDLIFE REFUGE",
   dat <- rgbif::occ_download_import(dat)
 
   # Clip out GBIF observations outside of true refuge boundary
-  clip_occ <- function(occ_recs, prop) {
-    occ_pts <- sf::st_multipoint(cbind(occ_recs$decimalLongitude, occ_recs$decimalLatitude)) %>%
-      sf::st_sfc(crs = sf::st_crs(prop)$proj4string) %>%
-      sf::st_cast("POINT")
-    suppressMessages(
-      keep <- sapply(sf::st_intersects(occ_pts, prop),
-                     function(z) {as.logical(length(z))})
-    )
-    occ_recs[keep, ]
-  }
   dat <- clip_occ(dat, prop)
 
   message("Done.")

@@ -16,6 +16,8 @@
 #'
 #' @export
 #' @import dplyr
+#' @import stringr
+#' @import magrittr
 #'
 #' @examples
 #' \dontrun{
@@ -25,32 +27,22 @@ clean_gbif <- function(dat){
 
   out <- dat %>%
 
-    mutate(evidence = case_when(   # Add evidence link, based on values in the reference column (if present) or a GBIF link
+    dplyr::mutate(evidence = dplyr::case_when(   # Add evidence link, based on values in the reference column (if present) or a GBIF link
       references != "" ~ references,
-      references == "" ~ str_c("https://www.gbif.org/occurrence/", as.character(gbifID))
+      references == "" ~ stringr::str_c("https://www.gbif.org/occurrence/", as.character(gbifID))
     )) %>%
 
-    arrange(desc(references)) %>%  # sort by reverse order to drop empty reference to the bottom
+    dplyr::arrange(desc(references)) %>%  # sort by reverse order to drop empty reference to the bottom
 
     dplyr::distinct(species, .keep_all = TRUE) %>%  # Keep a single observation for each species
 
-    select(species,  # Keep just the species names, lat/longs, evidence links, data evidence dates
+    dplyr::select(species,  # Keep just the species names, lat/longs, evidence links, data evidence dates
            lat = decimalLatitude,
            long = decimalLongitude,
            evidence,
            date = eventDate) %>%
 
-    filter(species != "")  # filter out rows without species names
+    dplyr::filter(species != "")  # filter out rows without species names
 
   return(out)
 }
-
-
-
-
-# Map the result
-# (p <- ggplot() + geom_sf(dat = prop))
-# (p + geom_point(dat = dat, aes(long, lat)))
-
-# Save as a csv
-# write.csv(dat, "gbif_spp.csv")

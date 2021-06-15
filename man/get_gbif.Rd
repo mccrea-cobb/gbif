@@ -4,12 +4,12 @@
 \alias{get_gbif}
 \title{Download species occurrence data from GBIF}
 \usage{
-get_gbif(orgname = "ARCTIC NATIONAL WILDLIFE REFUGE", pause = 45)
+get_gbif(prop, pause = 60, ...)
 }
 \arguments{
-\item{pause}{The number of seconds to pause to wait for the data request from GBIF to be ready. Default is 30 secs.}
+\item{prop}{An \code{sf} multipolygon object of a refuge boundary, returned by \code{get_refuge}.}
 
-\item{orgcode}{The org code for desired refuge}
+\item{pause}{The number of seconds to pause to wait for the data request from GBIF to be ready. Default is 60 secs. If it returns file size: 0 MB then increase the pause time.}
 }
 \value{
 A data frame of species occurrence data from GBIF within the boundary of the desired refuge
@@ -27,9 +27,9 @@ First time user - Add your GBIF credentials (username, password, email) to an .r
 }
 \examples{
 \dontrun{
-get_gbif(orgcode = 75600)
+get_gbif(orgname = "KODIAK NATIONAL WILDLIFE REFUGE")
 }
 }
 \author{
-McCrea Cobb \email{mccrea@fws.gov}
+McCrea Cobb \email{mccrea_cobb@fws.gov}
 }
