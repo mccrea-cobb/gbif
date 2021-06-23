@@ -25,7 +25,7 @@
 #' get_gbif(orgname = "KODIAK NATIONAL WILDLIFE REFUGE")
 #' }
 get_gbif <- function(prop,
-                     pause = 60,
+                     pause = 90,
                      ...){
   # Create a simplified convex hull of the refuge boundary in WKT format
   wkt <- get_wkt(prop)
