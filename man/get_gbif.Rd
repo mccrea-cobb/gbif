@@ -4,7 +4,7 @@
 \alias{get_gbif}
 \title{Download species occurrence data from GBIF}
 \usage{
-get_gbif(prop, pause = 60, ...)
+get_gbif(prop, pause = 90, ...)
 }
 \arguments{
 \item{prop}{An \code{sf} multipolygon object of a refuge boundary, returned by \code{get_refuge}.}
@@ -18,7 +18,7 @@ A data frame of species occurrence data from GBIF within the boundary of the des
 Download species occurrence data from GBIF
 }
 \note{
-First time user - Add your GBIF credentials (username, password, email) to an .renviron file using \code{usethis::edit_r_environ(scope = "project")}
+First time user - Add your GBIF credentials (username, password, email) to an .renviron file using \code{usethis::edit_r_environ(scope = "user")}
 \itemize{
 \item GBIF_USER = "your GBIF user name"
 \item GBIF_PWD = "your GBIF password"

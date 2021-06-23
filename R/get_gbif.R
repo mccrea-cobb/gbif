@@ -7,7 +7,7 @@
 #'
 #' @return A data frame of species occurrence data from GBIF within the boundary of the desired refuge
 #'
-#' @note First time user - Add your GBIF credentials (username, password, email) to an .renviron file using \code{usethis::edit_r_environ(scope = "project")}
+#' @note First time user - Add your GBIF credentials (username, password, email) to an .renviron file using \code{usethis::edit_r_environ(scope = "user")}
 #' * GBIF_USER = "your GBIF user name"
 #' * GBIF_PWD = "your GBIF password"
 #' * GBIF_EMAIL = "your email address"
