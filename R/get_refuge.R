@@ -17,7 +17,8 @@
 #' @examples
 #' \dontrun{
 #' get_refuge(orgname = "TETLIN NATIONAL WILDLIFE REFUGE")}
-get_refuge <- function(orgname = "ARCTIC NATIONAL WILDLIFE REFUGE"){
+get_refuge <- function(orgname = "Arctic National Wildlife Refuge"){
+  orgname <- toupper(orgname)
   message(paste("Downloading boundary layer for", orgname))
   url <- httr::parse_url("https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services")
   url$path <- paste(url$path, "National_Wildlife_Refuge_System_Boundaries/FeatureServer/0/query", sep = "/")

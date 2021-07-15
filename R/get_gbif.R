@@ -22,7 +22,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_gbif(orgname = "KODIAK NATIONAL WILDLIFE REFUGE")
+#' get_gbif(orgname = "Kodiak National Wildlife Refuge")
 #' }
 get_gbif <- function(prop,
                      pause = 90,
