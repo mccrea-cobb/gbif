@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mccrea-cobb/refugbif.png)](https://travis-ci.org/mccrea-cobb/refugbif)
+[![Build Status](https://travis-ci.com/mccrea-cobb/refugbif.png)](https://travis-ci.com/mccrea-cobb/refugbif)
 
 # refugbif
 An R package to download and clean GBIF species occurrence data in a National Wildlife Refuge.
