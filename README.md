@@ -16,3 +16,4 @@ To install and load the `refugbif` R package:
 `library(refugbif)`  
 
 `species_list <- get_species("ARCTIC NATIONAL WILDLIFE REFUGE") # Get species list for Arctic Refuge`
+
